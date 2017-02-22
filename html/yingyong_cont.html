@@ -245,6 +245,10 @@ var c={
 		var lx = d.lx;if(!lx)lx=0;
 		if(lx==999)return;
 		if(lx==998){this.xiang(d.oi);return;}
+		if(lx==5){
+			var url='index.php?a=lum&m=input&d=flow&num='+d.modenums+'&did='+d.mid+'&show=we';
+			js.openwin(d.modenumstitle, url);return;
+		}
 		this.changdatsss = d;
 		if(lx==2 || lx==3){
 			var clx='changeuser';if(lx==3)clx='changeusercheck';
