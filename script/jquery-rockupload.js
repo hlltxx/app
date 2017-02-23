@@ -6,7 +6,7 @@
 
 	function rockupload(opts){
 		var me = this;
-		var opts=js.apply({inputfile:'',uptype:'*',maxsize:50,onchange:function(){},onprogress:function(){},onsuccess:function(){},xu:0,fileallarr:[],autoup:true,
+		var opts=js.apply({inputfile:'',uptype:'*',maxsize:100,onchange:function(){},onprogress:function(){},onsuccess:function(){},xu:0,fileallarr:[],autoup:true,
 		onerror:function(){},
 		onabort:function(){},
 		allsuccess:function(){}

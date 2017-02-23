@@ -249,6 +249,11 @@ var c={
 			var url='index.php?a=lum&m=input&d=flow&num='+d.modenums+'&did='+d.mid+'&show=we';
 			js.openwin(d.modenumstitle, url);return;
 		}
+		if(lx==6){
+			var u = d.modenums.split(',');
+			url=u[1]+'&mid='+d.mid+'&show=we';
+			js.openwin(d.modenumstitle, url);return;
+		}
 		this.changdatsss = d;
 		if(lx==2 || lx==3){
 			var clx='changeuser';if(lx==3)clx='changeusercheck';
