@@ -219,7 +219,7 @@ var c={
 		js.ajax('todos','setread',{id:tid},function(ret){
 			console.log(ret);
 		});	
-		js.location(url);
+		js.openwin('查看',url);
 	},
 	tsetread:function(obj){
 		var tid = $(obj).attr('id');
