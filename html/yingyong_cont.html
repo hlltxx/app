@@ -223,7 +223,6 @@ var c={
 	},
 	tsetread:function(obj){
 		var tid = $(obj).attr('id');
-		js.msg('wait','处理中...');
 		js.ajax('todos','setread',{id:tid},function(ret){
 			if(ret=='ok'){
 				$(obj).parent().parent().find('.zt').css('background','green').html('已读');
@@ -242,7 +241,6 @@ var c={
 			var th = $(obj).parent().parent();
 		}
 		var tid = $(obj).attr('id');
-		js.msg('wait','删除中...');
 		js.ajax('todos','tidel',{id:tid},function(ret){
 			if(ret=='ok'){
 				th.remove();
