@@ -227,7 +227,7 @@ var c={
 		js.ajax('todos','setread',{id:tid},function(ret){
 			if(ret=='ok'){
 				$(obj).parent().parent().find('.zt').css('background','green').html('已读');
-				$(obj).parent().parent().find('.xq font').html('<font onclick="yy.tdel(this)" style="color:red;" id="'+tid+'" class="isread">删除</font>');
+				$(obj).parent().parent().find('.xq font').html('<font onclick="c.tdel(this)" style="color:red;" id="'+tid+'" class="isread">删除</font>');
 				js.msg('success','处理成功');
 			}else{
 				js.msg('msg','处理失败');
