@@ -169,6 +169,17 @@ var c={
 					s+='<div class="xq aui-border-t"><font onclick="c.showmenu('+oi+')">操作<i class="icon-angle-down"></i></font><span onclick="c.xiang('+oi+')">详情&gt;&gt;</span>';
 					s+='</div>';
 				}
+				if(d.status){
+					var st = '';
+					if(d.status==0){
+						st ='<font onclick="c.tsetread(this)" style="color:green;" id="'+d.id+'">设为已读</font>';
+					}else{
+						st ='<font onclick="c.tdel(this)" style="color:red;" id="'+d.id+'">删除</font>';
+					}
+					if(d.tmid>0 && d.tmodenum !='')st+='<span onclick="c.tixiang(this)" id="'+d.id+'" mid="'+d.tmid+'" modenum="'+d.tmodenum+'">查看&gt;&gt;</span>';
+					s+='<div class="xq aui-border-t">'+st;
+					s+='</div>';
+				}
 				if(d.statustext)s+='<div style="background-color:'+d.statuscolor+';opacity:0.7" class="zt">'+d.statustext+'</div>';
 				s+='</div>';
 			}
@@ -199,6 +210,47 @@ var c={
 		if(!modne||modne=='undefined')modne = params.name;
 		var url=''+apiurl+'task.php?a=x&modenum='+nus+'&mid='+ids+'';
 		js.openwin(modne,url);
+	},
+	tixiang:function(obj){
+		var tmid = $(obj).attr('mid');
+		var tnum = $(obj).attr('modenum');
+		var tid = $(obj).attr('id');
+		var url='task.php?a=x&num='+tnum+'&mid='+tmid+'&show=we';
+		js.ajax('todos','setread',{id:tid},function(ret){
+			console.log(ret);
+		});	
+		js.location(url);
+	},
+	tsetread:function(obj){
+		var tid = $(obj).attr('id');
+		js.msg('wait','处理中...');
+		js.ajax('todos','setread',{id:tid},function(ret){
+			if(ret=='ok'){
+				$(obj).parent().parent().find('.zt').css('background','green').html('已读');
+				$(obj).parent().parent().find('.xq font').html('<font onclick="yy.tdel(this)" style="color:red;" id="'+tid+'" class="isread">删除</font>');
+				js.msg('success','处理成功');
+			}else{
+				js.msg('msg','处理失败');
+			}
+		});
+	},
+	tdel:function(obj){
+		var rd = $(obj).parent().parent().find('.isread').html();
+		if(rd){
+			var th = $(obj).parent().parent().parent();
+		}else{
+			var th = $(obj).parent().parent();
+		}
+		var tid = $(obj).attr('id');
+		js.msg('wait','删除中...');
+		js.ajax('todos','tidel',{id:tid},function(ret){
+			if(ret=='ok'){
+				th.remove();
+				js.msg('success','删除成功');
+			}else{
+				js.msg('msg','删除失败');
+			}
+		});
 	},
 	suboptmenu:{},
 	showmenu:function(oi){
