@@ -52,7 +52,9 @@
 	
 	<div class="aui-content">
         <ul class="aui-user-view">
-
+			<li onclick="c.update()" class="aui-user-view-cell" id="appversion">
+                检查更新
+            </li>
         </ul>
     </div>
 	
@@ -153,15 +155,19 @@ var c={
 		});
 	
 	},
-	fankuai:function(){
-		js.openwin('建议反馈','http://ruisidechina.com/');
-	},
-	shate:function(){
-		var sharedModule = api.require('shareAction');
-		sharedModule.share({
-			text: "我正在使用瑞思德OA办公系统，邀请你也来一起使用。\n瑞思德官网：http://ruisidechina.com/",
-			type: 'text'
-		});
+	update:function(rets){
+		var path=rets.data;
+		api.showProgress({title: '检查中...',text: '',modal: true});
+		js.ajax('reim','upgrade',{version:api.appVersion},function(rs){
+			api.confirm({
+				title: '系统提示',
+				msg: rs,
+				buttons: ['确定', '取消']
+			}, function(ret, err){
+				if(ret.buttonIndex==1)api.toast({msg:'aa'});
+			});
+		},'none');
+	
 	},
 	clearss:function(lx){
 		api.toast({msg:'清除完成'});
