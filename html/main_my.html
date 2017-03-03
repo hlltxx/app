@@ -163,7 +163,10 @@ var c={
 				msg: rs,
 				buttons: ['确定', '取消']
 			}, function(ret, err){
-				if(ret.buttonIndex==1)api.toast({msg:'aa'});
+				if(ret.buttonIndex==1){
+					js.downshow(77);
+					api.toast({msg:'清除完成'});
+				}
 			});
 		},'none');
 	
