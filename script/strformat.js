@@ -35,7 +35,7 @@ var strformat = {
 		str	= str.replace(/\n/gi, '<br>');
 		return str;
 	},
-	downshow:function(sid){
+	downshow11:function(sid){
 		var url = 'mode/upload/uploadshow.php?id='+sid+'';
 		openurlla(url, 400, 300);
 		return false;
