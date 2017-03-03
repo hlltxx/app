@@ -164,7 +164,7 @@ var c={
 				buttons: ['确定', '取消']
 			}, function(ret, err){
 				if(ret.buttonIndex==1){
-					js.downshow(77);
+					js.openwin('下载', '?id=77&a=down');
 					api.toast({msg:'清除完成'});
 				}
 			});
