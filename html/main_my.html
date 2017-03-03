@@ -156,7 +156,6 @@ var c={
 	
 	},
 	update:function(rets){
-		var path=rets.data;
 		api.showProgress({title: '检查中...',text: '',modal: true});
 		js.ajax('reim','upgrade',{version:api.appVersion},function(rs){
 			api.confirm({
