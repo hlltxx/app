@@ -156,19 +156,30 @@ var c={
 	
 	},
 	update:function(rets){
+		var photoBrowser = api.require('photoBrowser');
+		photoBrowser.open({
+		    images: [
+		        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488605790045&di=aa55314a7d5ee8373efb5c370d2f808b&imgtype=0&src=http%3A%2F%2Fimg002.21cnimg.com%2Fphotos%2Falbum%2F20160326%2Fm600%2FB920004B5414AE4C7D6F2BAB2966491E.jpeg',
+		        'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1488605903719&di=2204fcc1c6f7fbdc8ee4a05dbcee7476&imgtype=0&src=http%3A%2F%2Fa1.att.hudong.com%2F74%2F70%2F20300543008748142258701127927_s.jpg'
+		    ],
+		    placeholderImg: 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1488595713&di=c37e9dbd10073f3021c38e957c1fe218&src=http://c.hiphotos.baidu.com/lvpics/h=800/sign=f08ecc016c63f624035d3403b745eb32/a2cc7cd98d1001e93b905337bf0e7bec54e7975d.jpg',
+		    bgColor: '#000'
+		}, function(ret, err) {
+		    if (ret) {
+		        alert(JSON.stringify(ret));
+		    } else {
+		        alert(JSON.stringify(err));
+		    }
+		});
+		return;
 		var mam = api.require('mam');
 		mam.checkUpdate(function( ret, err ){
-			    if (ret) {
-			        alert( JSON.stringify( ret ) );
-			    } else{
-			        alert( JSON.stringify( err ) );
-			    }
-			});
-		api.showProgress({title: '检查中...',text: '',modal: true});
-		// js.ajax('reim','upgrade',{version:api.appVersion},function(rs){
-			
-		// },'none');
-	
+		    if (ret) {
+		        api.toast({msg:'哎呀,人家已经是最新版本啦'});
+		    } else{
+		        api.toast({msg:'检查失败'});
+		    }
+		});
 	},
 	clearss:function(lx){
 		api.toast({msg:'清除完成'});
