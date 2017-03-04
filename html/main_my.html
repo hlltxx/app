@@ -156,19 +156,18 @@ var c={
 	
 	},
 	update:function(rets){
-		api.showProgress({title: '检查中...',text: '',modal: true});
-		js.ajax('reim','upgrade',{version:api.appVersion},function(rs){
-			api.confirm({
-				title: '系统提示',
-				msg: rs,
-				buttons: ['确定', '取消']
-			}, function(ret, err){
-				if(ret.buttonIndex==1){
-					js.openwin('下载', '?id=77&a=down');
-					api.toast({msg:'清除完成'});
-				}
+		var mam = api.require('mam');
+		mam.checkUpdate(function( ret, err ){
+			    if (ret) {
+			        alert( JSON.stringify( ret ) );
+			    } else{
+			        alert( JSON.stringify( err ) );
+			    }
 			});
-		},'none');
+		api.showProgress({title: '检查中...',text: '',modal: true});
+		// js.ajax('reim','upgrade',{version:api.appVersion},function(rs){
+			
+		// },'none');
 	
 	},
 	clearss:function(lx){
