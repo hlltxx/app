@@ -108,103 +108,116 @@ function exitApp(){
 	}, function(ret, err) {
 		if (isAndroid) {
 			dialogBox.alert({
-		        texts: {
-		        	title : '提醒',
-		            content: '您退出后将不能收到推送消息',
-		            leftBtnTitle: '仍然退出',
-		            rightBtnTitle: '最小化'
+		        texts : {
+		            title : ' 提醒',
+		            content : '您退出后将不能收到推送通知',
+		            leftBtnTitle : '仍然退出',
+		            rightBtnTitle : '最小化'
 		        },
-		        styles: {
-		            bg: '#fff',
-		            corner: 6,
-		            w: 280,
-		            content: {
-		                color: '#000',
-		                size: 18
+		        styles : {
+		            bg : '#fff',
+		            corner : 6,
+		            w : 260,
+		            title : {
+		                marginT : 20,
+		                titleSize : 18,
+		                titleColor : '#000'
 		            },
-		            left: {
-		                marginB: 15,
-		                marginL: 30,
-		                w: 100,
-		                h: 40,
-		                corner: 20,
-		                color: "#fff",
-		                bg: '#CDCDCD',
-		                size: 16
+		            content : {
+		                color : '#000',
+		                size : 16
 		            },
-		            right: {
-		                marginB: 15,
-		                marginL: 20,
-		                w: 100,
-		                h: 40,
-		                corner: 20,
-		                color: "#fff",
-		                bg: '#C087C0',
-		                size: 16
+		            left : {
+		                marginB : 15,
+		                marginL : 40,
+		                w : 40,
+		                h : 35,
+		                corner : 2,
+		                color : "#000",
+		                bg : '#fff',
+		                size : 16
+		            },
+		            right : {
+		                marginB : 15,
+		                marginL : 88,
+		                w : 40,
+		                h : 35,
+		                corner : 2,
+		                color : "#000",
+		                bg : '#fff',
+		                size : 16
 		            }
 		        },
-		        tapClose: true
+		        tapClose : true
 		    }, function(ret) {
 		        if (ret.eventType == 'left'){
 		            dialogBox.close({
 		                dialogName: 'alert'
 		            });
 		            api.closeWidget({
-						id: 'A6917065771076',
+						id: 'A6939644085551',
 						retData: {name:'closeWidget'},
 						silent:true
 					});
 		        }
 		        if(ret.eventType == 'right'){
+		        	dialogBox.close({
+		                dialogName: 'alert'
+		            });
 		        	var rb = api.require('runBackground');
 		    		rb.hideActivity();
 		        }
 		    });
 		}else{//ios
 			dialogBox.alert({
-		        texts: {
-		        	title : '提醒',
-		            content: '确定要退出程序吗',
-		            leftBtnTitle: '退出',
-		            rightBtnTitle: '取消'
+		        texts : {
+		            title : ' 提醒',
+		            content : '您确定要退出程序吗',
+		            leftBtnTitle : '退出',
+		            rightBtnTitle : '取消'
 		        },
-		        styles: {
-		            bg: '#fff',
-		            corner: 6,
-		            w: 280,
-		            content: {
-		                color: '#000',
-		                size: 18
+		        styles : {
+		            bg : '#fff',
+		            corner : 6,
+		            w : 260,
+		            title : {
+		                marginT : 20,
+		                titleSize : 18,
+		                titleColor : '#000'
 		            },
-		            left: {
-		                marginB: 15,
-		                marginL: 30,
-		                w: 100,
-		                h: 40,
-		                corner: 20,
-		                color: "#fff",
-		                bg: '#CDCDCD',
-		                size: 16
+		            content : {
+		                color : '#000',
+		                size : 16
 		            },
-		            right: {
-		                marginB: 15,
-		                marginL: 20,
-		                w: 100,
-		                h: 40,
-		                corner: 20,
-		                color: "#fff",
-		                bg: '#C087C0',
-		                size: 16
+		            left : {
+		                marginB : 15,
+		                marginL : 40,
+		                w : 40,
+		                h : 35,
+		                corner : 2,
+		                color : "#000",
+		                bg : '#fff',
+		                size : 16
+		            },
+		            right : {
+		                marginB : 15,
+		                marginL : 88,
+		                w : 40,
+		                h : 35,
+		                corner : 2,
+		                color : "#000",
+		                bg : '#fff',
+		                size : 16
 		            }
 		        },
-		        tapClose: true
+		        tapClose : true
 		    }, function(ret) {
 		        if (ret.eventType == 'left'){
 		            dialogBox.close({
 		                dialogName: 'alert'
 		            });
 		            api.closeWidget({
-						id: 'A6917065771076',
+						id: 'A6939644085551',
 						retData: {name:'closeWidget'},
 						silent:true
 					});
