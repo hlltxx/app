@@ -80,6 +80,23 @@ function bodyunload(){
 	api.closeFrameGroup({
 		name: 'main'
 	});
+	var backSecond = 0;
+	api.addEventListener({
+	    name: 'keyback'
+	}, function(ret, err) {
+	    var curSecond = new Date().getSeconds();
+	    if (Math.abs(curSecond - backSecond) > 2) {
+	        backSecond = curSecond;
+	        api.toast({
+	            msg: '连续按两次到后台运行',
+	            duration: 2000,
+	            location: 'bottom'
+	        });
+	    } else {
+	        var rb = api.require('runBackground');
+	        rb.hideActivity();
+	    }
+	});
 }
 function initindex(){
 	if(adminid=='' || adminid=='0'){
