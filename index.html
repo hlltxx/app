@@ -73,19 +73,6 @@
 </body>
 <script type="text/javascript">
 var touchobj=false;
-var backSecond = 0;
-api.addEventListener({
-    name: 'keyback'
-}, function(ret, err) {
-    var curSecond = new Date().getSeconds();
-    if (Math.abs(curSecond - backSecond) > 2) {
-        backSecond = curSecond;
-        api.toast({msg: '连续按两次到后台运行'});
-    } else {
-        var rb = api.require('runBackground');
-        rb.hideActivity();
-    }
-});
 indexrelod=function(){
 	location.reload();
 }
@@ -112,6 +99,31 @@ function initindex(){
 		opengroup();
 		tencentPushadd();
 	}	
+}
+function exitApp(){
+    api.addEventListener({
+        name: 'keyback'
+    }, function(ret, err){
+        api.toast({
+                msg: '再按一次返回键退出'+api.appName,
+                duration:2000,
+                location: 'bottom'
+            });
+            
+            api.addEventListener({
+                name: 'keyback'
+            }, function(ret, err){
+                api.closeWidget({
+                        id: 'A6917065771076', 
+                        retData: {name:'closeWidget'},
+                        silent:true
+                    });
+            });
+            
+            setTimeout(function(){
+                    exitApp();
+            },3000)
+    });
 }
 function eventback(d){
 	var typ=d.opttype;
@@ -173,6 +185,7 @@ apiready = function(){
 	},function(ret, err){
 		longpressshow();
 	});
+	exitApp();
 }
 function getsystitle(){
 	var tits=js.getoption('systitle');
