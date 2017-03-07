@@ -101,22 +101,121 @@ function initindex(){
 	}	
 }
 function exitApp(){
-    var backSecond = 0;
+	var dialogBox = api.require('dialogBox');
+    var isAndroid = (/android/gi).test(navigator.appVersion);
 	api.addEventListener({
 	    name: 'keyback'
 	}, function(ret, err) {
-	    var curSecond = new Date().getSeconds();
-	    if (Math.abs(curSecond - backSecond) > 2) {
-	        backSecond = curSecond;
-	        api.toast({
-	            msg: '连续按两次到后台运行',
-	            duration: 2000,
-	            location: 'bottom'
-	        });
-	    } else {
-	        var rb = api.require('runBackground');
-	        rb.hideActivity();
-	    }
+		if (isAndroid) {
+			dialogBox.alert({
+		        texts: {
+		        	title : '提醒',
+		            content: '您退出后将不能收到推送消息',
+		            leftBtnTitle: '仍然退出',
+		            rightBtnTitle: '最小化'
+		        },
+		        styles: {
+		            bg: '#fff',
+		            corner: 6,
+		            w: 280,
+		            content: {
+		                color: '#000',
+		                size: 18
+		            },
+		            left: {
+		                marginB: 15,
+		                marginL: 30,
+		                w: 100,
+		                h: 40,
+		                corner: 20,
+		                color: "#fff",
+		                bg: '#CDCDCD',
+		                size: 16
+		            },
+		            right: {
+		                marginB: 15,
+		                marginL: 20,
+		                w: 100,
+		                h: 40,
+		                corner: 20,
+		                color: "#fff",
+		                bg: '#C087C0',
+		                size: 16
+		            }
+		        },
+		        tapClose: true
+		    }, function(ret) {
+		        if (ret.eventType == 'left'){
+		            dialogBox.close({
+		                dialogName: 'alert'
+		            });
+		            api.closeWidget({
+						id: 'A6917065771076',
+						retData: {name:'closeWidget'},
+						silent:true
+					});
+		        }
+		        if(ret.eventType == 'right'){
+		        	var rb = api.require('runBackground');
+		    		rb.hideActivity();
+		        }
+		    });
+		}else{//ios
+			dialogBox.alert({
+		        texts: {
+		        	title : '提醒',
+		            content: '确定要退出程序吗',
+		            leftBtnTitle: '退出',
+		            rightBtnTitle: '取消'
+		        },
+		        styles: {
+		            bg: '#fff',
+		            corner: 6,
+		            w: 280,
+		            content: {
+		                color: '#000',
+		                size: 18
+		            },
+		            left: {
+		                marginB: 15,
+		                marginL: 30,
+		                w: 100,
+		                h: 40,
+		                corner: 20,
+		                color: "#fff",
+		                bg: '#CDCDCD',
+		                size: 16
+		            },
+		            right: {
+		                marginB: 15,
+		                marginL: 20,
+		                w: 100,
+		                h: 40,
+		                corner: 20,
+		                color: "#fff",
+		                bg: '#C087C0',
+		                size: 16
+		            }
+		        },
+		        tapClose: true
+		    }, function(ret) {
+		        if (ret.eventType == 'left'){
+		            dialogBox.close({
+		                dialogName: 'alert'
+		            });
+		            api.closeWidget({
+						id: 'A6917065771076',
+						retData: {name:'closeWidget'},
+						silent:true
+					});
+		        }
+		        if(ret.eventType == 'right'){
+		        	dialogBox.close({
+		                dialogName: 'alert'
+		            });
+		        }
+		    });
+		}
 	});
 }
 function eventback(d){
